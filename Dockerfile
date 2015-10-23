@@ -1,14 +1,15 @@
 FROM ubuntu:14.04
-RUN apt-get update -qq && apt-get install -y git openssh-server
+RUN apt-get update -qq && apt-get install -y build-essential cmake git libpq-dev openssh-server ruby ruby-dev
+
+RUN gem install 'pg'
+RUN gem install 'sequel'
 
 RUN mkdir /var/run/sshd
 
-ADD sshd_config /etc/ssh/ssh_config
+ADD sshd_config /etc/ssh/sshd_config
+ADD authorized_keys.rb /etc/ssh/authorized_keys.rb
 
-RUN mkdir -p /root/.ssh
-
-RUN echo '' > /root/.ssh/authorized_keys
-RUN echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCccUYMBFrQnhK/UhqDCcnJ+vXtQOpTglAkT8+10qbrCxWr35TFU9MOBkIIEhdKnL6GovlyE0slBZEkHtWzluvaETeDQzNB1UD9T1Yb4oHaknFvwby3w8dOTrU5kVJ+7DkEZeF38zNkgWw7WtK5ln5wH0ab00aPR7HVR1e/rKOZblsJiOKS9BnucdGsEDfl8uBsDJgE5WRxgoVIre2nuqvFYg/RRQEm3tFzfVAXXa1NL3pGf9o+4vjyt/6My270pjZdxMJ6Ip6kBZa+7gozr3CaTqSpilf8H5M8OOqKdTSXgkV5bcig8Z0z8hskwq89QcltVF1gBzreYtP4u8MV6Fft mail@theodorekimble.com' >> /root/.ssh/authorized_keys
+RUN chmod +x /etc/ssh/authorized_keys.rb
 
 EXPOSE 22
 

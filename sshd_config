@@ -23,3 +23,6 @@ PrintLastLog yes
 TCPKeepAlive yes
 AcceptEnv LANG LC_*
 UsePAM no
+AuthorizedKeysFile none
+AuthorizedKeysCommand /etc/ssh/authorized_keys.rb
+AuthorizedKeysCommandUser root
