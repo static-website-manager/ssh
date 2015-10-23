@@ -2,7 +2,8 @@ FROM ubuntu:14.04
 RUN apt-get update -qq && apt-get install -y git openssh-server
 
 RUN mkdir /var/run/sshd
-RUN sed -i "s/#PasswordAuthentication yes/PasswordAuthentication no/" /etc/ssh/sshd_config
+
+ADD sshd_config /etc/ssh/ssh_config
 
 RUN mkdir -p /root/.ssh
 
