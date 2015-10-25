@@ -31,7 +31,11 @@ elsif %w[git-upload-pack git-receive-pack git-upload-archive].include?(command)
   if args.length == 1 && repo_id_match = args[0].match(/\A\/?(\d{1,9})(\.git)?\z/)
     if website = DB[:websites].where(id: repo_id_match[1].to_i).first
       if authorization = DB[:authorizations].where(user_id: user[:id], website_id: website[:id]).first
-        exec "#{command} /repos/#{repo_id_match[1]}.git"
+        if authorization[:ssh_access]
+          exec "#{command} /repos/#{repo_id_match[1]}.git"
+        else
+          abort 'Your SSH Access Setting Is Not Enabled'
+        end
       else
         abort 'Not Authorized'
       end
