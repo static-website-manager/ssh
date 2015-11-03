@@ -6,13 +6,9 @@ RUN gem install 'sequel'
 
 RUN mkdir /var/run/sshd
 
-ADD sshd_config /etc/ssh/sshd_config
-ADD authorized_keys.rb /etc/ssh/authorized_keys.rb
-ADD authorized_actions.rb /etc/ssh/authorized_actions.rb
+COPY sshd_config /etc/ssh/sshd_config
+COPY authorized_keys.rb /etc/ssh/authorized_keys.rb
+COPY authorized_actions.rb /etc/ssh/authorized_actions.rb
 
 RUN chmod +x /etc/ssh/authorized_keys.rb
 RUN chmod +x /etc/ssh/authorized_actions.rb
-
-EXPOSE 22
-
-CMD ["/usr/sbin/sshd", "-D"]
