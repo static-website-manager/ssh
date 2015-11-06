@@ -2,7 +2,7 @@
 
 require 'sequel'
 
-DB = Sequel.connect('postgres://postgres@postgres:5432/static_website_manager_development')
+DB = Sequel.connect("postgres://#{ENV['DATABASE_USERNAME']}:#{ENV['DATABASE_PASSWORD']}@#{ENV['DATABASE_HOST']}:5432/#{ENV['DATABASE_NAME']}")
 
 keys = []
 

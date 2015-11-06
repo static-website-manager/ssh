@@ -17,7 +17,7 @@ if !user_id.match(/\A\d{1,9}\z/)
   abort 'Expected User ID'
 end
 
-DB = Sequel.connect('postgres://postgres@postgres:5432/static_website_manager_development')
+DB = Sequel.connect("postgres://#{ENV['DATABASE_USERNAME']}:#{ENV['DATABASE_PASSWORD']}@#{ENV['DATABASE_HOST']}:5432/#{ENV['DATABASE_NAME']}")
 
 user = DB[:users].where(id: user_id.to_i).first
 command, *args = Shellwords.shellsplit(ENV['SSH_ORIGINAL_COMMAND'].to_s)
