@@ -1,5 +1,13 @@
 #!/usr/bin/ruby
 
+File.open('/repos/test_actions', 'w+') do |f|
+  f.write ENV['SSH_ORIGINAL_COMMAND']
+  f.write ARGV
+  f.write '---'
+  f.write '---'
+  f.write '---'
+end
+
 require 'sequel'
 require 'shellwords'
 

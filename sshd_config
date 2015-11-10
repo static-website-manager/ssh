@@ -7,7 +7,8 @@ ServerKeyBits 1024
 SyslogFacility AUTH
 LogLevel INFO
 LoginGraceTime 120
-PermitRootLogin without-password
+PermitRootLogin no
+AllowUsers git
 StrictModes yes
 PubkeyAuthentication yes
 IgnoreRhosts yes
@@ -24,5 +25,5 @@ TCPKeepAlive yes
 AcceptEnv LANG LC_*
 UsePAM no
 AuthorizedKeysFile none
-AuthorizedKeysCommand /etc/ssh/authorized_keys.rb
+AuthorizedKeysCommand /etc/ssh/public_keys.rb
 AuthorizedKeysCommandUser root

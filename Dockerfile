@@ -6,9 +6,12 @@ RUN gem install 'sequel'
 
 RUN mkdir /var/run/sshd
 
-COPY sshd_config /etc/ssh/sshd_config
-COPY authorized_keys.rb /etc/ssh/authorized_keys.rb
-COPY authorized_actions.rb /etc/ssh/authorized_actions.rb
+RUN adduser --disabled-password --gecos '' --uid 1448 --ingroup root git
 
-RUN chmod +x /etc/ssh/authorized_keys.rb
-RUN chmod +x /etc/ssh/authorized_actions.rb
+COPY sshd_config /etc/ssh/sshd_config
+COPY public_keys.rb /etc/ssh/public_keys.rb
+COPY allowed_actions.rb /home/git/allowed_actions.rb
+
+RUN chmod +x /etc/ssh/public_keys.rb
+RUN chmod +x /home/git/allowed_actions.rb
+RUN chown git /home/git/allowed_actions.rb
