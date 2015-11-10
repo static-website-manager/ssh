@@ -6,7 +6,8 @@ RUN gem install 'sequel'
 
 RUN mkdir /var/run/sshd
 
-RUN adduser --disabled-password --gecos '' --uid 1448 --ingroup root git
+RUN addgroup --system --gid 1448 git
+RUN adduser --disabled-password --gecos '' --uid 1448 --ingroup git git
 
 COPY sshd_config /etc/ssh/sshd_config
 COPY public_keys.rb /etc/ssh/public_keys.rb
