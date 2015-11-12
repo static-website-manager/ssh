@@ -7,12 +7,11 @@ if ENV['SSH_CONNECTION'].to_s.empty?
   abort 'Only SSH Connections Allowed'
 end
 
-if !ARGV.is_a?(Array) || ARGV.length != 2
-  abort 'Expected Argument Array of user_id and postgres_url'
+if !ARGV.is_a?(Array) || ARGV.length != 1
+  abort 'Expected Argument Array of user_id'
 end
 
 user_id = ARGV[0].to_s
-postgres_url = ARGV[1].to_s
 
 if !user_id.match(/\A\d{1,9}\z/)
   abort 'Expected User ID'
