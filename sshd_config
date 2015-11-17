@@ -1,6 +1,9 @@
 Port 22
 Protocol 2
-HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /ssh_keys/ssh_host_rsa_key
+HostKey /ssh_keys/ssh_host_dsa_key
+HostKey /ssh_keys/ssh_host_ecdsa_key
+HostKey /ssh_keys/ssh_host_ed25519_key
 UsePrivilegeSeparation yes
 KeyRegenerationInterval 3600
 ServerKeyBits 1024
