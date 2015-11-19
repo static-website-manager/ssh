@@ -16,3 +16,7 @@ COPY allowed_actions.rb /home/git/allowed_actions.rb
 RUN chmod +x /etc/ssh/public_keys.rb
 RUN chmod +x /home/git/allowed_actions.rb
 RUN chown git /home/git/allowed_actions.rb
+
+COPY entrypoint.sh /sbin/entrypoint.sh
+RUN chmod 755 /sbin/entrypoint.sh
+ENTRYPOINT ["/sbin/entrypoint.sh"]

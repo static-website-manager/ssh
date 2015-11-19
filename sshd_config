@@ -1,9 +1,6 @@
 Port 22
 Protocol 2
 HostKey /ssh_keys/ssh_host_rsa_key
-HostKey /ssh_keys/ssh_host_dsa_key
-HostKey /ssh_keys/ssh_host_ecdsa_key
-HostKey /ssh_keys/ssh_host_ed25519_key
 UsePrivilegeSeparation yes
 KeyRegenerationInterval 3600
 ServerKeyBits 1024
@@ -20,6 +17,7 @@ HostbasedAuthentication no
 PermitEmptyPasswords no
 ChallengeResponseAuthentication no
 PasswordAuthentication no
+MaxStartups 100:30:200
 X11Forwarding yes
 X11DisplayOffset 10
 PrintMotd no
@@ -27,6 +25,7 @@ PrintLastLog yes
 TCPKeepAlive yes
 AcceptEnv LANG LC_*
 UsePAM no
+UseDNS no
 AuthorizedKeysFile none
 AuthorizedKeysCommand /etc/ssh/public_keys.rb
 AuthorizedKeysCommandUser root
