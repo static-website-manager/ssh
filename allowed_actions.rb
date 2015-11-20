@@ -7,17 +7,18 @@ if ENV['SSH_CONNECTION'].to_s.empty?
   abort 'Only SSH Connections Allowed'
 end
 
-if !ARGV.is_a?(Array) || ARGV.length != 1
-  abort 'Expected Argument Array of user_id'
+if !ARGV.is_a?(Array) || ARGV.length != 2
+  abort 'Expected Argument Array of user_id and postgres_url'
 end
 
 user_id = ARGV[0].to_s
+postgresl_url = ARGV[1].to_s
 
 if !user_id.match(/\A\d{1,9}\z/)
   abort 'Expected User ID'
 end
 
-DB = Sequel.connect('postgres://postgres@postgres:5432/postgres')
+DB = Sequel.connect(postgresl_url)
 user = DB[:users].where(id: user_id.to_i).first
 command, *args = Shellwords.shellsplit(ENV['SSH_ORIGINAL_COMMAND'].to_s)
 
